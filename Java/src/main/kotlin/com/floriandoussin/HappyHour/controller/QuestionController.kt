@@ -6,8 +6,20 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
+import java.util.ArrayList
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+
+
 
 @RestController
+@CrossOrigin(origins = ["http://localhost:4200"], maxAge = 3600)
 @RequestMapping("/api")
 class QuestionController(private val questionRepository: QuestionRepository) {
 
@@ -46,7 +58,6 @@ class QuestionController(private val questionRepository: QuestionRepository) {
 
     @DeleteMapping("/question/{id}")
     fun deleteQuestionById(@PathVariable(value = "id") questionId: Long): ResponseEntity<Void> {
-
         return questionRepository.findById(questionId).map { question  ->
             questionRepository.delete(question)
             ResponseEntity<Void>(HttpStatus.OK)
