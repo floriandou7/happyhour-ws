@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank
 
 @Entity
 data class Question (
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id @GeneratedValue(strategy = GenerationType.TABLE)
         val id: Long = 0,
 
     @get: NotBlank
